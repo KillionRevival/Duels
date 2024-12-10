@@ -5,6 +5,8 @@ import com.meteordevelopments.duels.DuelsPlugin;
 import com.meteordevelopments.duels.config.converters.ConfigConverter9_10;
 import com.meteordevelopments.duels.util.EnumUtil;
 import com.meteordevelopments.duels.util.config.AbstractConfiguration;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -395,7 +397,14 @@ public class Config extends AbstractConfiguration<DuelsPlugin> {
         if (sounds != null) {
             for (final String name : sounds.getKeys(false)) {
                 final ConfigurationSection sound = sounds.getConfigurationSection(name);
-                final Sound type = EnumUtil.getByName(sound.getString("type"), Sound.class);
+                if (sound == null) {
+                    continue;
+                }
+                final String typeString = sound.getString("type");
+                if (typeString == null) {
+                    continue;
+                }
+                final Sound type = Registry.SOUNDS.get(NamespacedKey.minecraft(typeString.toLowerCase()));
 
                 if (type == null) {
                     continue;

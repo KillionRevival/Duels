@@ -17,7 +17,7 @@ dependencies {
     compileOnly 'org.jetbrains:annotations-java5:24.1.0'
     compileOnly 'org.projectlombok:lombok:1.18.36'
     annotationProcessor 'org.projectlombok:lombok:1.18.36'
-    implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT'
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'com.mojang:authlib:1.5.25'
     implementation 'me.clip:placeholderapi:2.11.6'
@@ -46,7 +46,7 @@ dependencies {
     implementation project(':duels-common')
     implementation 'io.papermc:paperlib:1.0.8'
     implementation 'space.arim.morepaperlib:morepaperlib:0.4.4'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
     implementation 'org.json:json:20240303'
 }
 
@@ -70,6 +70,8 @@ shadowJar {
 
     final String group = project.group.toString() + "." + parent.name.toLowerCase() + ".shaded."
     relocate 'com.fasterxml.jackson.core', group + 'jackson-core'
+    relocate 'com.fasterxml.jackson.databind', group + 'jackson-databind'
+    relocate 'com.fasterxml.jackson.annotation', group + 'jackson-annotation'
     relocate 'io.papermc.lib', group + 'paperlib'
     relocate 'space.arim.morepaperlib', group + 'morepaperlib'
 }
